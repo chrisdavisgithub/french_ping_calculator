@@ -35,6 +35,8 @@ ALLOWED_HOSTS = [
 
 USE_I18N = True
 
+DATABASES = {}
+
 # Application definition
 
 INSTALLED_APPS = (
