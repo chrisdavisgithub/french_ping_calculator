@@ -1,0 +1,24 @@
+server {
+    listen 80;
+    server_name ping.ulakanakulot.me;
+
+    error_log /home/django-apps/french_ping_calculator/var/nginx.log;
+    access_log /home/django-apps/french_ping_calculator/var/nginx-access.log;
+
+#   Uncomment these lines to enable;
+#   statics and medias in the configuration.;
+
+    location /media {
+        alias /home/django-apps/french_ping_calculator/media/;
+    }
+
+    location /static {
+        alias /home/django-apps/french_ping_calculator/static/;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8009;
+        proxy_set_header Host $http_host;
+    }
+
+}

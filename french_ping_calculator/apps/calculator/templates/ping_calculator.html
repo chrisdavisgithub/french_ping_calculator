@@ -1,0 +1,66 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Calculateur de point pour le Tennis de table Français">
+<title>
+  Calculateur ping Français
+</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link href="{% static "css/foundation.css"%}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class ="row">
+<div class="large-8 columns">
+<form action="" method="post">
+{% crispy player_form%}
+{{ match_formset.management_form }}
+<fieldset>
+    <legend>Matchs</legend>
+{% for form in match_formset %}
+    {% crispy form%}
+{% endfor %}
+</fieldset>
+<input type="button" class="btn btn-primary medium button green" value="{% trans 'Add More' %}" id="add_more">
+<input type="submit" name="submit" value="{% trans 'Calcul'%}" class="btn btn-primary btn btn-primary medium button green" id="submit-id-submit">
+</form>
+</div>
+{% if competition %}
+<div class="large-3 columns">
+    <fieldset class="">
+        <legend>{% trans 'Results: '%}</legend>
+        {% for match in competition.matchs %}
+            <p>Match {{forloop.counter}} : {{ match.get_result }}</p>
+        {% endfor %}
+            <p>total : {{competition.get_result}}</p>
+    </fieldset>
+</div>
+</div>
+{% endif %}
+<script>
+    $('#add_more').click(function() {
+        cloneMore('div.match:last', 'match');
+    });
+    function cloneMore(selector, type) {
+    var newElement = $(selector).clone(true);
+    var total = $('#id_' + 'match' + '-TOTAL_FORMS').val();
+    newElement.find(':input').each(function() {
+        var name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
+        var id = 'id_' + name;
+        $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+    });
+    newElement.find('label').each(function() {
+        var newFor = $(this).attr('for').replace('-' + (total-1) + '-','-' + total + '-');
+        $(this).attr('for', newFor);
+    });
+    total++;
+    $('#id_' + type + '-TOTAL_FORMS').val(total);
+    $(selector).after(newElement);
+}
+</script>
+</body>
+</html>

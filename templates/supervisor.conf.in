@@ -1,0 +1,6 @@
+[program:french_ping_calculator]
+command = ${command}
+user = ${user}
+stdout_logfile = ${stdout_logfile}
+redirect_stderr = ${redirect_stderr}
+environment=${environment}

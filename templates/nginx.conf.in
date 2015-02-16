@@ -1,0 +1,24 @@
+server {
+    listen 80;
+    server_name ping.ulakanakulot.me;
+
+    error_log ${var:paths}/nginx.log;
+    access_log ${var:paths}/nginx-access.log;
+
+#   Uncomment these lines to enable;
+#   statics and medias in the configuration.;
+
+    location /media {
+        alias ${buildout:directory}/media/;
+    }
+
+    location /static {
+        alias ${buildout:directory}/static/;
+    }
+
+    location / {
+        proxy_pass http://${gunicorn-ctl:bind};
+        proxy_set_header Host $http_host;
+    }
+
+}
