@@ -1,6 +1,7 @@
 *.pyc
 *.pyo
 *.~
+#*
 local_settings.py
 .installed.cfg
 .git/
