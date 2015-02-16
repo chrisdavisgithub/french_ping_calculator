@@ -1,4 +1,3 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from calculator.constants import SCORE_TABLE
