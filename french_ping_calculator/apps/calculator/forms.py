@@ -8,14 +8,9 @@ from crispy_forms_foundation import layout as _l
 COEF = ((0.5, 0.5), (0.75, 0.75), (1, 1), (1.25, 1.25), (1.5, 1.5))
 OUTCOMES = (('victory', _('Victory')), ('defeat', _('Defeat')))
 
-custom_errors = {
-    'required': _('This field is required'),
-    'invalid': _('Enter a valid value')
-}
-
 
 class PlayerForm(forms.Form):
-    player_point = forms.IntegerField(label=_('Player ranking'), error_messages=custom_errors)
+    player_point = forms.IntegerField(label=_('Player ranking'))
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
@@ -37,14 +32,13 @@ class PlayerForm(forms.Form):
 
 
 class MatchForm(forms.Form):
-    opponent_point = forms.IntegerField(label=_('Opponent ranking'), error_messages=custom_errors)
-    coef = forms.ChoiceField(choices=COEF, error_messages=custom_errors)
+    opponent_point = forms.IntegerField(label=_('Opponent ranking'))
+    coef = forms.ChoiceField(choices=COEF)
     is_won = forms.ChoiceField(
         label=_("Did you win the match?"),
         choices=(('yes', _("Yes")), ('no', _("No"))),
         required=True,
-        widget=forms.RadioSelect,
-        error_messages=custom_errors,
+	widget=forms.RadioSelect
     )
 
     def __init__(self, *args, **kwargs):
