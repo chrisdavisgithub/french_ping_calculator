@@ -31,3 +31,6 @@ local_settings.py
 .nanorc
 .pip/
 .ssh/
+.ido.last
+.ido.last~
+.emacs
