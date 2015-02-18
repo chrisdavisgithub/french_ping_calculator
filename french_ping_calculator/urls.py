@@ -5,12 +5,8 @@ from django.conf.urls import url
 from django.conf.urls import include
 from django.conf.urls import patterns
 
-admin.autodiscover()
+from calculator.views import PingCalculatorView
 
 urlpatterns = patterns('',
-    # Examples:
-    url(r'^$', 'calculator.views.PingCalculatorView', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    #url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', PingCalculatorView.as_view(), name='home'),
 )

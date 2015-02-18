@@ -35,8 +35,12 @@ ALLOWED_HOSTS = [
 
 USE_I18N = True
 
-DATABASES = {}
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'dummy.db',
+    }                                     
+}
 # Application definition
 
 INSTALLED_APPS = (
