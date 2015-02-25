@@ -42,13 +42,23 @@
 </div>
 {% endif %}
 <script>
-    $('#add_more').click(function() {
-        cloneMore('div.match:last', 'match');
+    $('#add_more').click(function(){
+        if($('#id_match-TOTAL_FORMS').val() < $('#id_match-MAX_NUM_FORMS').val()){
+            cloneMore('div.match:last', 'match');
+        }
     });
+    $('.remove-form').click(function(){
+    if(!$(this).hasClass('disabled')){
+        $(this).parent('div.match').remove();
+    }else{
+    return false;
+    }
+    })
     function cloneMore(selector, type) {
     var newElement = $(selector).clone(true);
-    var total = $('#id_' + 'match' + '-TOTAL_FORMS').val();
-    newElement.find(':input').each(function() {
+    var total = $('#id_match-TOTAL_FORMS').val();
+    newElement.children('.remove-form').removeClass('disabled');
+    newElement.find(':input[name!=remove-form]').each(function() {
         var name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
         var id = 'id_' + name;
         $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');

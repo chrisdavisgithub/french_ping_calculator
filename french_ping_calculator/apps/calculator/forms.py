@@ -57,9 +57,14 @@ class MatchForm(forms.Form):
                 ),
                 _l.Column(
                     _('is_won'),
-                    css_class='large-5 end radio_field',
+                    css_class='large-4 end radio_field',
                 ),
-                css_class='large-9 match'
+                _l.Button(
+                    'remove-form',
+                    _('X'),
+                    css_class='tiny large-1 alert remove-form disabled'
+                ),
+                css_class='large-9 match',
             )
         )
 
